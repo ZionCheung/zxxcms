@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+{include file="public/head" /}
+<body class="index">
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo">
+            <a>
+              <img src="__IMG__/backstage/logo.png" alt="">
+            </a></div>
+        <div class="left_open">
+            <a><i title="展开左侧栏" class="fa fa-bars"></i></a>
+        </div>
+        <ul class="layui-nav left fast-add" lay-filter="">
+            <li class="layui-nav-item">
+                <a href="javascript:;">快捷添加</a>
+                <dl class="layui-nav-child">
+                    <!-- 二级菜单 -->
+                    <dd>
+                        <a onclick="xadmin.open('弹出自动宽高','http://www.baidu.com')">
+                            <i class="iconfont">&#xe6a8;</i>弹出自动宽高
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.open('弹出指定宽高','http://www.baidu.com',500,300)">
+                            <i class="iconfont">&#xe6a8;</i>弹出指定宽高
+                        </a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav right prohibit" lay-filter="">
+          <li class="layui-nav-item" id="full-screen">
+            <a onclick="fullScreen()"><i class="fa fa-arrows-alt"></i></a>
+          </li>
+          <li class="layui-nav-item" id="exit-screen" style="display: none">
+            <a onclick="exitScreen()"><i class="fa fa-compress"></i></a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;"><i class="fa fa-lock"></i>
+            </a>
+            <dl class="layui-nav-child">
+              <!-- 二级菜单 -->
+              <dd>
+                <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">锁屏密码</a>
+              </dd>
+              <dd>
+                <a href="./login.html">锁定屏幕</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;"><i class="fa fa-question-circle"></i>
+            </a>
+            <dl class="layui-nav-child">
+              <!-- 二级菜单 -->
+              <dd>
+                <a onclick="xadmin.open('帮助','http://www.baidu.com', 900, 600)">帮助</a>
+              </dd>
+              <dd>
+                <a onclick="xadmin.open('关于我','http://www.baidu.com', 900, 600)">关于我</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;"><i class="fa fa-power-off"></i></a>
+            <dl class="layui-nav-child">
+              <!-- 二级菜单 -->
+              <dd>
+                <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a>
+              </dd>
+              <dd>
+                <a href="./login.html">退出</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;">更换主题</a>
+            <dl class="layui-nav-child">
+              <!-- 二级菜单 -->
+              <dd>
+                <a>高贵红</a>
+              </dd>
+              <dd>
+                <a>天空蓝</a>
+              </dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item to-index">
+            <a href="/">前台首页</a>
+          </li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav prohibit">
+      <div class="admin-desc">
+        <div class="desc-head">
+          <img src="__IMG__/backstage/admin.jpeg" alt="">
+        </div>
+        <div class="desc-head-m">
+          <img src="__IMG__/backstage/admin.jpeg" alt="">
+        </div>
+        <span class="desc-name">ZionCheung</span>
+        <span class="desc-position">超级管理员</span>
+        <span class="desc-position" id="webtime">正在获取时间(*^▽^*)</span>
+      </div>
+        <script type="text/javascript">
+            $(function () {
+                function currentTime() {
+                    var authorMsg;
+                    var currentTime = new Date();
+                    var ctimeY = currentTime.getFullYear();
+                    var ctimeMth = currentTime.getMonth() + 1;
+                    var ctimeD = currentTime.getDate();
+                    var ctimeDay = currentTime.getDay();
+                    var ctimeH = currentTime.getHours();
+                    var ctimeM = currentTime.getMinutes();
+                    var ctimeS = currentTime.getSeconds();
+                    switch (ctimeDay) {
+                        case 0:ctimeDay = '星期日';break;case 1:ctimeDay = '星期一';break;
+                        case 2:ctimeDay = '星期二';break;case 3:ctimeDay = '星期三';break;
+                        case 4:ctimeDay = '星期四';break;case 5:ctimeDay = '星期五';break;
+                        case 6:ctimeDay = '星期六';break;
+                    }
+                    switch (ctimeH) {
+                        case 1:case 2:case 3:case 4:case 5:case 22:case 23:case 24:
+                            authorMsg = '深夜了! 放下行囊, 舒服的躺下吧!(｡•́︿•̀｡)';break;
+                        case 6:case 7:case 8:case 9:case 10:
+                            authorMsg = '早上好! 勇士,今天也是充满希望的一天哦! ~(*^▽^*)';break;
+                        case 11:case 12:case 13:case 14:
+                            authorMsg = '中午好! 今天吃啥呢,最困扰的问题又出现了! ~(o_o) ';break;
+                        case 15:case 16:case 17:case 18:
+                            authorMsg = '下午好! 忙碌的你,千万别忘记家的关怀!~(＝^ω^＝)';break;
+                        default:
+                            authorMsg = '晚上好,愿你的勤奋应有回报!~ (¯(∞)¯) 晚安!';break;
+                    }
+                    (ctimeH < 10) ? ctimeH = '0' + ctimeH : ctimeH;
+                    (ctimeM < 10) ? ctimeM = '0' + ctimeM : ctimeM;
+                    (ctimeS < 10) ? ctimeS = '0' + ctimeS : ctimeS;
+                    ctime = ctimeY + '/' + ctimeMth + '/' + ctimeD + ' ' + ctimeH + ':' + ctimeM + ':' + ctimeS + '  ' + ctimeDay + '  ' + authorMsg;
+                    return ctime;
+                }
+                setInterval(function () {
+                    $("#webtime").html(currentTime)
+                }, 1000);
+            });
+        </script>
+        <div id="side-nav">
+            <ul id="nav">
+                {volist name="cate" id="vo"}
+                <li>
+                    <a href="javascript:;">
+                        <i style="font-size: 18px" class="{$vo.menus_icon} left-nav-li" lay-tips="{$vo.menus_name}"></i>
+                        <cite>{$vo.menus_name}</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                  </a>
+                  <ul class="sub-menu">
+                      {volist name="vo.child" id="child"}
+                        <li>
+                          <a onclick="xadmin.add_tab('{$child.menus_name}','{:url($child.menus_link)}')">
+                            <i class="{$child.menus_icon}"></i>
+                            <cite>{$child.menus_name}</cite></a>
+                        </li>
+                      {/volist}
+                  </ul>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="convenience-bar">
+          <div class="notice">
+            <script type="text/javascript">
+              $(function(){
+                $(".notice-content").slideUps();
+              })
+            </script>
+            <span class="notice-title"><i class="fa fa-bell"></i></span>
+            <ul class="notice-content">
+              <li>
+                <a onclick="xadmin.open('最新公告','https://fanyi.baidu.com/?aldtype=16047#zh/en/%E5%B7%A5%E5%85%B7',900,600)">vue2.x新版本已经发布成功</a>
+              </li>
+              <li>
+                <a onclick="xadmin.open('最新公告','http://www.baidu.com',900,600)">github最新版本将在明年7月正式上市</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tool">
+            <ul class="tool-list" id="tool">
+              <li>
+                <a onclick="xadmin.open('最新公告','http://www.baidu.com',900,600)">
+                  <i class="fa fa-envelope-o" lay-tips="QQ邮箱"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title prohibit">
+                <li class="home layui-this">
+                    <i class="fa fa-home"></i>我的桌面</li>
+            </ul>
+            <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">关闭这个标签页</dd>
+                    <dd data-type="other">关闭其他标签页</dd>
+                    <dd data-type="all">关闭所有标签页</dd>
+                </dl>
+            </div>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="{:url('serverside/Home/backHomeInfo')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+            <div id="tab_show"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    // 全屏设置
+      function fullScreen(){
+        var el = document.documentElement;
+        var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        if(typeof rfs != "undefined" && rfs) {
+          rfs.call(el);
+        };
+        var full = document.getElementById("full-screen");
+        var exit = document.getElementById("exit-screen");
+        full.style.display = 'none';
+        exit.style.display = '';
+        return;
+      }
+      function exitScreen(){
+        var full = document.getElementById("full-screen");
+        var exit = document.getElementById("exit-screen");
+        full.style.display = '';
+        exit.style.display = 'none';
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+        else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        }
+        else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        }
+        else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+        if(typeof cfs != "undefined" && cfs) {
+          cfs.call(el);
+        }
+      }
+</script>
+</html>

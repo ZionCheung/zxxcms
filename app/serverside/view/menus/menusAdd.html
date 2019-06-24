@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+<body>
+<div class="x-nav prohibit">
+  <span class="layui-breadcrumb">
+    <a>首页</a>
+    <a>导航系统</a>
+    <a><cite>添加导航</cite></a>
+  </span>
+  <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+    <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+  </a>
+</div>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="page-tips">
+            <blockquote class="layui-elem-quote">{$pageTips}</blockquote>
+          </div>
+          <div class="layui-card-body ">
+            <form class="layui-form" style="display: block; width: 350px; margin: 0 auto;">
+              <div class="layui-form-item">
+                <label for="menuName" class="layui-form-label">
+                  <span class="x-red">*</span>导航名称</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuName"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="menuEngName" class="layui-form-label">
+                  <span class="x-red">*</span>英文名称</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuEngName"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="menuIcon" class="layui-form-label">
+                  <span class="x-red">*</span>导航图标</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuIcon"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="menuLink" class="layui-form-label">
+                  <span class="x-red">*</span>导航链接</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuLink"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         class="layui-input">
+                  <span style="color: #2F4056">若为顶级导航,此项可以随便填写</span>
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>导航分级</label>
+                <div class="layui-input-inline">
+                  <select name="menuRank" lay-verify="required">
+                    <option value="0">顶级导航(默认)</option>
+                    {volist name="menus" id="vo"}
+                    <option value="{$vo.menus_id}">{$vo.menus_name}</option>
+                    {/volist}
+                  </select>
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>导航开关</label>
+                <div class="layui-input-block">
+                  <input type="radio" name="menuOpen" value="1" title="开启" checked>
+                  <input type="radio" name="menuOpen" value="0" title="关闭">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label"></label>
+                <button class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  layui.use(['form', 'layer'],
+  function () {
+    $ = layui.jquery;
+    var form = layui.form,
+      layer = layui.layer;
+    //自定义验证规则
+    form.verify({
+    });
+    //监听提交
+    form.on('submit(add)',
+      function (data) {
+        $.ajax({
+          type: 'POST',
+          url: "{:url('serverside/menus/menusAddHandle')}",
+          data: {
+            menus: data.field
+          },
+          success: function (response) {
+            if (response.code === 0) {
+              layer.msg('添加导航成功!', {icon: 1, anim: 3, time: 1000});
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000)
+            } else if (response.code === -1) {
+              layer.msg(response.mge, {icon: 5, anim: 6, time: 2000})
+            } else {
+              layer.msg('系统错误', {icon: 5, anim: 6, time: 1000})
+            }
+          },
+          dataType: 'json'
+        })
+        //发异步，把数据提交给php
+        return false;
+      });
+
+  });
+</script>
+</body>
+
+</html>

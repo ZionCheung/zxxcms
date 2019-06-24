@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+<body>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="page-tips">
+            <blockquote class="layui-elem-quote">{$pageTips}</blockquote>
+          </div>
+          <div class="layui-card-body ">
+            <form class="layui-form" style="display: block; width: 350px; margin: 0 auto;">
+              <input type="hidden" name="menuId" value="{$menus.menus_id}">
+              <div class="layui-form-item">
+                <label for="menuName" class="layui-form-label">
+                  <span class="x-red">*</span>导航名称</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuName"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         value="{$menus.menus_name}"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="menuEngName" class="layui-form-label">
+                  <span class="x-red">*</span>英文名称</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuEngName"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         value="{$menus.menus_eng_name}"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="menuIcon" class="layui-form-label">
+                  <span class="x-red">*</span>导航图标</label>
+                <div class="layui-input-inline">
+                  <input type="text"
+                         id="username"
+                         name="menuIcon"
+                         required=""
+                         lay-verify="required"
+                         autocomplete="off"
+                         value="{$menus.menus_icon}"
+                         class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label"></label>
+                <button class="layui-btn" lay-filter="add" lay-submit="">修改</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  layui.use(['form', 'layer'],
+  function () {
+    $ = layui.jquery;
+    var form = layui.form,
+      layer = layui.layer;
+    //监听提交
+    form.on('submit(add)', function (data) {
+        $.ajax({
+          type: 'POST',
+          url: "{:url('serverside/menus/menusUpdateHandle')}",
+          data: {
+            menus: data.field
+          },
+          success: function (response) {
+            if (response === 0) {
+              layer.msg('修改成功!', {icon: 1, anim: 3, time: 1000});
+              setTimeout(() => {
+                xadmin.close();
+                xadmin.father_reload();
+              }, 1000)
+            } else {
+              layer.msg('修改失败!', {icon: 5, anim: 6, time: 1000})
+            }
+          },
+          dataType: 'json'
+        })
+        //发异步，把数据提交给php
+        return false;
+      });
+
+  });
+</script>
+</body>
+
+</html>

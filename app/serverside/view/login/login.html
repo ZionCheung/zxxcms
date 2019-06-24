@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="__CSS__/login/login.css">
+	<title>login</title>
+</head>
+<body>
+	<div class="login-box">
+		<form action="{:url('serverside/login/loginHandle')}" method="post" id="form-login">
+			<label class="form-inline">
+				<div class="form-inline-font">用户名:</div>
+				<div class="form-inline-input">
+					<input type="text" name="username" value="developer" maxlength="8"/>
+				</div>
+			</label>
+			<label class="form-inline">
+				<div class="form-inline-font">
+					密码:
+				</div>
+				<div class="form-inline-input">
+					<input type="password" name="password" value="developer" maxlength="16" />
+				</div>
+			</label>
+			<label class="form-inline">
+				<div class="form-inline-font">
+					请完成验证:
+				</div>
+				<div class="form-inline-input">
+					<div class="code-box" id="code-box">
+						<input type="text" id="code" name="code" class="code-input" />
+						<p></p>
+						<span id="verifyform">>>></span>
+						<span id="codebj">>>></span>
+					</div>
+				</div>
+			</label>
+
+			<div class="login-btn">
+				<div class="user-btn-link">
+					<a href="">找回密码？</a>
+				</div>
+				<button onclick="return sub()">登录</button>
+			</div>
+		</form>
+	</div>
+</body>
+<script src="__JS__/login/login.js"></script>
+<script>
+	function sub () {
+	  var input = document.getElementsByTagName('input');
+	  for (i=0; i < input.length; i++) {
+			if (typeof input[i].value == "undefined" || input[i].value == null || input[i].value == "") {
+			  return false;
+			}
+	  }
+	}
+	// 监听滚动验证
+	window.addEventListener('load', function(){
+		var code = "{$code}";
+		console.log(code);
+		codeFn = new moveCode(code);
+		codeFn.resetCode();
+	});
+</script>
+
+</html>

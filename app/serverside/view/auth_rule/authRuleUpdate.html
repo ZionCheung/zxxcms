@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="page-tips">
+                    <blockquote class="layui-elem-quote">$pageTips</blockquote>
+                </div>
+                <div class="layui-card-body ">
+                    <form class="layui-form" style="display: block; width: 350px; margin: 0 auto;">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><span class="x-red">*</span>规则类型</label>
+                            <div class="layui-input-inline">
+                                <select lay-verify="required" name="ruleRank">
+                                    <option value="0">顶级规则</option>
+                                    {volist name="ruleRank" id="vo"}
+                                    <option value="{$vo.id}" {if condition="$vo.id eq $rule.rank_id"} selected {else/}{/if}>{$vo.title}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="width: 500px">
+                            <label for="ruleName" class="layui-form-label">
+                                <span class="x-red">*</span>规则标识
+                            </label>
+                            <div class="layui-input-inline" style="width: 282px">
+                                <input type="text"
+                                       id="username"
+                                       name="ruleName"
+                                       required=""
+                                       value="{$rule.name}"
+                                       lay-verify="required"
+                                       autocomplete="off"
+                                       class="layui-input">
+                                <span style="color: red">唯一标识(模块/控制器/方法)</span>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="ruleTitle" class="layui-form-label">
+                                <span class="x-red">*</span>规则标题</label>
+                            <div class="layui-input-inline">
+                                <input type="text"
+                                       id="ruleTitle"
+                                       name="ruleTitle"
+                                       required=""
+                                       value="{$rule.title}"
+                                       lay-verify="required"
+                                       autocomplete="off"
+                                       class="layui-input">
+                                <input type="hidden" name="ruleId" value="{$rule.id}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">文本域</label>
+                            <div class="layui-input-block">
+                                <textarea name="ruleCondition" placeholder="请输入附加规则,若没有请保持为空" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_repass" class="layui-form-label"></label>
+                            <button class="layui-btn" lay-filter="add" lay-submit="">修改</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['form', 'layer'],
+        function () {
+            $ = layui.jquery;
+            var form = layui.form,
+                layer = layui.layer;
+            //监听提交
+            form.on('submit(add)',
+                function (data) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{:url('serverside/AuthRule/authRuleUpdateHandle')}",
+                        data: {
+                            rules: data.field
+                        },
+                        success: function (response) {
+                            if (response === 0) {
+                                layer.msg('修改规则成功!', {icon: 1, anim: 3, time: 1000});
+                                setTimeout(() => {
+                                    xadmin.close();
+                                    xadmin.father_reload();
+                                }, 1000)
+                            } else {
+                                layer.msg('系统错误', {icon: 5, anim: 6, time: 1000})
+                            }
+                        },
+                        dataType: 'json'
+                    })
+                  return false;
+                });
+    });
+</script>
+</body>
+</html>

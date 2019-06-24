@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+    <body>
+        <div class="x-nav prohibit">
+          <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>权限管理</a>
+            <a>
+              <cite>后台权限组管理</cite></a>
+          </span>
+          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="page-tips">
+                            <blockquote class="layui-elem-quote">$pageTips</blockquote>
+                        </div>
+                        <div class="layui-card-body ">
+                            <form class="layui-form layui-col-space5" action="{:url('serverside/AuthRule/authRuleManagePage')}" method="get">
+                                <div class="layui-input-inline layui-show-xs-block" style="width: 320px">
+                                    <input class="layui-input" placeholder="规则标识/规则标题" name="keyword" autocomplete="off">
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="fa fa-search"></i>查找</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="layui-card-header">
+                            <button class="layui-btn" onclick="xadmin.open('添加规则','{:url('serverside/AuthGroup/authGroupAddPage')}', 800, 620)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加权限组</button>
+                            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                        </div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table layui-form rule-table" lay-even lay-skin="nob" style="cursor: pointer;">
+                              <thead>
+                                <tr style="background-color: #fff;">
+                                    <th>
+                                        <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                                    </th>
+                                  <th>#</th>
+                                  <th>权限组名称</th>
+                                  <th>所有规则</th>
+                                  <th>权限组状态</th>
+                                  <th>操作</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {volist name="group" id="vo"  empty="暂时没有数据"}
+                                <tr>
+                                    <td>
+                                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{$vo.id}'><i class="layui-icon">&#xe605;</i></div>
+                                    </td>
+                                  <td>{$i}</td>
+                                  <td>{$vo.title}</td>
+                                  <td><a href="" style="color:#000;">点击查看所有规则</a></td>
+                                  <td>
+                                      <input type="checkbox" name="ruleOpen" value="{$vo.id}" lay-text="开启|停用" lay-skin="switch" {if condition="$vo.status eq 1"} checked {else /}{/if}>
+                                  </td>
+                                  <td class="td-manage">
+                                      <button class="layui-btn layui-btn layui-btn-xs"  onclick="xadmin.open('规则修改','{:url('serverside/AuthRule/authRuleUpdatePage', ['ruleId' => $vo.id])}', 520, 520)"><i class="layui-icon">&#xe642;</i>编辑</button>
+                                      <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'{$vo.id}')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+                                  </td>
+                                </tr>
+                              {/volist}
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="layui-card-body ">
+                            <div class="page">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+      layui.use(['laydate','form'], function(){
+        var laydate = layui.laydate;
+        var form = layui.form;
+
+          form.on('switch()', function (data) {
+              $.ajax({
+                  type: 'POST',
+                  data: {ruleId: data.value},
+                  url: "",
+                  success: function (response) {
+                      if (response.code === 0) {
+                          layer.tips(response.mge, data.othis)
+                      } else {
+                          layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                      }
+                  },
+                  dataType: 'json'
+              })
+          });
+      });
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              $.ajax({
+                  type: 'POST'
+                  ,data: {ruleId: id}
+                  ,url: ""
+                  ,success: function (response) {
+                      if (response.code == 0) {
+                          $(obj).parents("tr").remove();
+                          layer.msg('已删除!',{icon:1,time:1000});
+                      } else {
+                          layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                      }
+                  }
+                  ,dataType: 'json'
+              })
+          });
+      }
+      function delAll (argument) {
+          var data = tableCheck.getData();
+          var ruleId = data.join(",");
+          if (data == '') return false;
+          layer.confirm('确认要删除吗？',function(index){
+              $.ajax({
+                  type: 'POST'
+                  ,data: {ruleId: ruleId}
+                  ,url: ""
+                  ,success: function (response) {
+                      if (response.code == 0) {
+                          layer.msg('删除成功', {icon: 1});
+                          $(".layui-form-checked").not('.header').parents('tr').remove();
+                      } else {
+                          layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                      }
+                  }
+                  ,dataType: 'json'
+              })
+          });
+      }
+    </script>
+<script>
+    $(function () {
+        tableCheck = {
+            init:function  () {
+                $(".layui-form-checkbox").click(function(event) {
+                    if($(this).hasClass('layui-form-checked')){
+                        $(this).removeClass('layui-form-checked');
+                        if($(this).hasClass('header')){
+                            $(".layui-form-checkbox").removeClass('layui-form-checked');
+                        }
+                    }else{
+                        $(this).addClass('layui-form-checked');
+                        if($(this).hasClass('header')){
+                            $(".layui-form-checkbox").addClass('layui-form-checked');
+                        }
+                    }
+
+                });
+            },
+            getData:function  () {
+                var obj = $(".layui-form-checked").not('.header');
+                var arr=[];
+                obj.each(function(index, el) {
+                    arr.push(obj.eq(index).attr('data-id'));
+                });
+                return arr;
+            }
+        }
+        //开启表格多选
+        tableCheck.init();
+    })
+</script>
+</html>

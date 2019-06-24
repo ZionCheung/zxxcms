@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+    <body>
+        <div class="x-nav prohibit">
+            <span class="layui-breadcrumb">
+                <a>首页</a>
+                <a>导航系统</a>
+                <a>
+                  <cite>管理导航</cite>
+                </a>
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+            </a>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                          <blockquote class="layui-elem-quote">{$pageTips}</blockquote>
+                          <hr>
+                          <form class="layui-form layui-col-space5" method="get" action="{:url('serverside/menus/menusManagePage')}">
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <input class="layui-input" placeholder="分类名" name="keywords" autocomplete="off">
+                                </div>
+                                <div class="layui-input-inline layui-show-xs-block">
+                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="fa fa-search"></i>查找</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="layui-card-body">
+                            <table class="layui-table layui-form">
+                              <thead>
+                                <tr>
+                                  <th width="70">ID</th>
+                                  <th>导航名称</th>
+                                  <th>导航英文名称</th>
+                                  <th>导航链接</th>
+                                  <th width="10">导航图标</th>
+                                  <th width="50">排序</th>
+                                  <th width="80">状态</th>
+                                  <th width="250">操作</th>
+                              </thead>
+                              <tbody class="x-cate">
+                              {volist name="menus" id="vo" empty="暂时没有数据" key="i"}
+                                <tr cate-id="{$vo.menus_id}" fid="{$vo.menus_rank}">
+                                  <td>{$i}</td>
+                                  <td>
+                                    <i class="layui-icon x-show" status='true'>&#xe623;</i>
+                                    {$vo.menus_name}
+                                  </td>
+                                  <td>
+                                    {$vo.menus_eng_name}
+                                  </td>
+                                  <td>
+                                    顶级导航
+                                  </td>
+                                  <td align="center">
+                                    <i style="color: #019688;font-size: 18px" class="{$vo.menus_icon}"></i>
+                                  </td>
+                                  <td>
+                                    <input type="text" class="layui-input x-sort" name="order" onchange="setMenuSort('{$vo.menus_id}', this)" value="{$vo.menus_sort}">
+                                  </td>
+                                  <td>
+                                    <input type="checkbox" name="menusOpen" value="{$vo.menus_id}" lay-text="开启|停用" lay-skin="switch" {if condition="$vo.menus_open eq 1"}checked {else/}{/if}>
+                                  </td>
+                                  <td class="td-manage">
+                                    <button class="layui-btn layui-btn layui-btn-xs"  onclick="xadmin.open('导航编辑','{:url('serverside/menus/menusUpdatePage', ['menusId' => $vo.menus_id])}', 500, 400)" ><i class="layui-icon">&#xe642;</i>编辑</button>
+                                    <button class="layui-btn layui-btn-warm layui-btn-xs"  onclick="xadmin.open('添加子菜单','{:url('serverside/menus/menusAddChildPage', ['menusId' => $vo.menus_id])}', 500, 600)" ><i class="layui-icon">&#xe642;</i>添加子栏目</button>
+                                    <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'{$vo.menus_id}')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+                                  </td>
+                                </tr>
+                                {volist name="$vo.child" id="child" key="j"}
+                                <tr cate-id="{$child.menus_id}" fid="{$child.menus_rank}" >
+                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;{$j}</td>
+                                  <td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    ---
+                                    {$child.menus_name}
+                                  </td>
+                                  <td>
+                                    {$child.menus_eng_name}
+                                  </td>
+                                  <td>
+                                    {$child.menus_link}
+                                  </td>
+                                  <td align="center">
+                                    <i style="color: #FFB800;font-size: 16px" class="{$child.menus_icon}"></i>
+                                  </td>
+                                  <td><input type="text" class="layui-input x-sort" name="order" onchange="setMenuSort('{$child.menus_id}', this)" value="{$child.menus_sort}"></td>
+                                  <td>
+                                    <input type="checkbox" value="{$child.menus_id}" name="menusOpen"  lay-text="开启|停用" {if condition="$child.menus_open eq 1"}checked {else/}{/if} lay-skin="switch">
+                                  </td>
+                                  <td class="td-manage">
+                                    <button class="layui-btn layui-btn layui-btn-xs"  onclick="xadmin.open('导航编辑','{:url('serverside/menus/menusUpdatePage', ['menusId' => $child.menus_id])}', 500, 400)" ><i class="layui-icon">&#xe642;</i>编辑</button>
+                                    <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'{$child.menus_id}')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+                                  </td>
+                                </tr>
+                                {/volist}
+                              {/volist}
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+          layui.use(['form'], function(){
+            form = layui.form;
+
+            form.on('switch()', function (data) {
+              $.ajax({
+                type: 'POST',
+                data: {menusId: data.value},
+                url: "{:url('serverside/menus/menusOpenHandle')}",
+                success: function (response) {
+                  if (response.code === 0) {
+                    layer.tips(response.mge, data.othis)
+                  } else {
+                    layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                  }
+                },
+                dataType: 'json'
+              })
+            });
+          });
+          function member_del(obj,id){
+              layer.confirm('确认要删除吗？',function(index){
+                  //发异步删除数据
+                $.ajax({
+                  type: 'POST',
+                  url: "{:url('serverside/menus/menusDeleteHandle')}",
+                  data: {menusId: id},
+                  success: function (response) {
+                    if (response.code === 0) {
+                      $(obj).parents("tr").remove();
+                      layer.msg('删除导航成功!', {icon: 1, anim: 3, time: 1000});
+                    } else if (response.code === -1) {
+                      layer.msg(response.mge, {icon: 5, anim: 6, time: 2000})
+                    } else {
+                      layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                    }
+                  },
+                  dataType: 'json'
+                })
+              });
+          }
+          function setMenuSort (id, values) {
+            let data = {
+              menuId: id,
+              menuSort: values.value
+            };
+            $.ajax({
+              type: 'POST',
+              url: "{:url('serverside/menus/menusSortHandle')}",
+              data: data,
+              success: function (response) {
+                if (response.code === 0) {
+                  layer.msg('修改排序成功!', {icon: 1, anim: 3, time: 500});
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 500)
+                } else {
+                  layer.msg('系统错误', {icon: 5, anim: 6, time: 2000})
+                }
+              },
+              dataType: 'json'
+            })
+          }
+          $(function(){
+            $("tbody.x-cate tr[fid!='0']").hide();
+            // 栏目多级显示效果
+            $('.x-show').click(function () {
+                if($(this).attr('status')=='true'){
+                    $(this).html('&#xe625;');
+                    $(this).attr('status','false');
+                    cateId = $(this).parents('tr').attr('cate-id');
+                    $("tbody tr[fid="+cateId+"]").show();
+               }else{
+                    cateIds = [];
+                    $(this).html('&#xe623;');
+                    $(this).attr('status','true');
+                    cateId = $(this).parents('tr').attr('cate-id');
+                    getCateId(cateId);
+                    for (var i in cateIds) {
+                        $("tbody tr[cate-id="+cateIds[i]+"]").hide().find('.x-show').html('&#xe623;').attr('status','true');
+                    }
+               }
+            })
+          })
+          var cateIds = [];
+          function getCateId(cateId) {
+              $("tbody tr[fid="+cateId+"]").each(function(index, el) {
+                  id = $(el).attr('cate-id');
+                  cateIds.push(id);
+                  getCateId(id);
+              });
+          }
+        </script>
+    </body>
+</html>
