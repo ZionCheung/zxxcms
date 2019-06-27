@@ -24,7 +24,7 @@ class AuthRule extends BaseServer
         $view = new View();
         $view ->assign('rules', $rules['data']);
         $view ->assign('page', $rules['page']);
-        return $view ->fetch('auth_rule/AuthRuleManage');
+        return $view ->fetch('auth_rule/authRuleManage');
     }
 
     // 权限规则添加页面

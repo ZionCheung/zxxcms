@@ -11,11 +11,11 @@ namespace app\client\controller;
 use app\serverside\model\AdminCustomizeLink;
 use app\serverside\model\Administrators;
 use think\View;
+use think\Controller;
 
-class Client
+class Client extends Controller
 {
     public function clientIndex () {
-        $user = Administrators::getAdminCustomizeLink();
-        dump(time());
+        $this ->redirect('serverside/home/backHomePage');
     }
 }
