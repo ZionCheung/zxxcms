@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+  <body>
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <form class="layui-form layui-form-pane">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">
+                        {$title} -- 拥有权限共({$rulesCount})个
+                    </label>
+                    <table  class="layui-table layui-input-block">
+                        <tbody>
+                        {volist name="rules" id="vo" empty="暂时没有数据"}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" lay-skin="primary" lay-filter="" value="{$vo.id}" title="{$vo.title}" disabled checked>
+                                </td>
+                            </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+              </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+            var form = layui.form
+            ,layer = layui.layer;
+        });
+    </script>
+  </body>
+
+</html>

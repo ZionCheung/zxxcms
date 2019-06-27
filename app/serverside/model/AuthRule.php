@@ -162,4 +162,20 @@ class AuthRule extends Model
        $rule = Catehandle::cateMoreRecomBination($ruleArray, 'id', 'rank_id');
        return $rule;
     }
+
+    /**
+     * @param $ruleId
+     * @return array
+     * @throws \think\exception\DbException
+     * 批量获取权限规则
+     */
+    public static function getRuleIdAllInfo ($ruleId) {
+        $rule = self::all($ruleId);
+        $ruleArray = ReturnDataHandle::setReturnArray($rule);
+        $response = [
+            'data' => $ruleArray,
+            'count' => count($ruleArray)
+        ];
+        return $response;
+    }
 }

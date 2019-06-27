@@ -10,8 +10,9 @@
                         <span class="x-red">*</span>权限组名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="name" required="" lay-verify="required"
+                        <input type="text" id="name" value="{$groupName}" name="name" required="" lay-verify="required"
                         autocomplete="off" class="layui-input">
+                        <input type="hidden" value="{$groupId}" name="groupId">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
@@ -23,12 +24,12 @@
                         {volist name="rules" id="vo" empty="暂时没有数据"}
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="id[]" lay-skin="primary" lay-filter="father" value="{$vo.id}" title="{$vo.title}">
+                                    <input type="checkbox" name="id[]" lay-skin="primary" lay-filter="father" value="{$vo.id}" title="{$vo.title}" {if condition="in_array($vo.id, $checkRules)"} checked{else/}{/if}>
                                 </td>
                                 <td>
                                     <div class="layui-input-block">
                                       {volist name="$vo.child" id="child" empty="暂时没有数据"}
-                                        <input name="id[]" lay-skin="primary" type="checkbox" title="{$child.title}" value="{$child.id}">
+                                        <input name="id[]" lay-skin="primary" type="checkbox" title="{$child.title}" value="{$child.id}" {if condition="in_array($child.id, $checkRules)"} checked{else/}{/if}>
                                       {/volist}
                                     </div>
                                 </td>
@@ -42,11 +43,11 @@
                         描述
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea" required="" lay-verify="required"></textarea>
+                        <textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea" required="" lay-verify="required">{$groupDesc}</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
+                <button class="layui-btn" lay-submit="" lay-filter="add">更新</button>
               </div>
             </form>
         </div>
@@ -62,16 +63,14 @@
               $.ajax({
                 type: 'POST'
                 ,data: data.field
-                ,url: "{:url('serverside/AuthGroup/authGroupAddHandle')}"
+                ,url: "{:url('serverside/AuthGroup/authGroupUpdateHandle')}"
                 ,success: function (response) {
-                  if (response.code === 0) {
-                    layer.msg('添加权限组成功!', {icon: 1, anim: 3, time: 1000});
+                  if (response === 0) {
+                    layer.msg('修改权限组成功!', {icon: 1, anim: 3, time: 1000});
                     setTimeout(() => {
                       xadmin.close();
                       xadmin.father_reload();
                     }, 1000)
-                  } else if (response.code === -1) {
-                    layer.msg(response.mge, {icon: 5, anim: 6, time: 2000})
                   } else {
                     layer.msg('系统错误', {icon: 5, anim: 6, time: 1000})
                   }

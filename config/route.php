@@ -68,6 +68,16 @@ Route::get('admin/authGroupManagePage', 'serverside/AuthGroup/authGroupManagePag
 Route::get('admin/authGroupAddPage', 'serverside/AuthGroup/authGroupAddPage');
 // 权限组添加操作
 Route::post('admin/authGroupAddHandle', 'serverside/AuthGroup/authGroupAddHandle');
+// 权限组修改页面
+Route::get('admin/authGroupUpdatePage/:groupId', 'serverside/AuthGroup/authGroupUpdatePage');
+// 权限组修改操作
+Route::post('admin/authGroupUpdateHandle', 'serverside/AuthGroup/authGroupUpdateHandle');
+// 权限组开关
+Route::post('admin/authGroupStatusHandle', 'serverside/AuthGroup/authGroupStatusHandle');
+// 权限组删除
+Route::post('admin/authGroupDelete', 'serverside/AuthGroup/authGroupDelete');
+// 权限组拥有权限页面
+Route::get('admin/authGroupRulesPage/:groupId','serverside/AuthGroup/authGroupRulesPage');
 
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');
