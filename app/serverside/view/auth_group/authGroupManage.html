@@ -17,7 +17,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="page-tips">
-                            <blockquote class="layui-elem-quote">$pageTips</blockquote>
+                            <blockquote class="layui-elem-quote">{$pageTips}</blockquote>
                         </div>
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" action="{:url('serverside/AuthGroup/authGroupManagePage')}" method="get">
@@ -30,7 +30,7 @@
                             </form>
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加规则','{:url('serverside/AuthGroup/authGroupAddPage')}', 800, 620)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加权限组</button>
+                            <button class="layui-btn" onclick="xadmin.open('权限组添加','{:url('serverside/AuthGroup/authGroupAddPage')}', 800, 620)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加权限组</button>
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                         </div>
                         <div class="layui-card-body ">

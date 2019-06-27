@@ -21,6 +21,8 @@ class AuthGroup extends BaseServer
     // 权限组管理页面
     public function authGroupManagePage ($key = '') {
         $group = groupModel::getAllAuthGroupPage(10, $key);
+        $pageTips = config('public.page_tips_content');
+        $this ->assign('pageTips', $pageTips['authGroupManagePage']);
         $this ->assign('group', $group['data']);
         $this ->assign('page', $group['page']);
         return $this ->fetch('auth_group/authGroupManage');

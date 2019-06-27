@@ -22,6 +22,8 @@ class AuthRule extends BaseServer
     public function authRuleManagePage ($keyword = "") {
         $rules = ruleModel::getAllRulePage(10, $keyword);
         $view = new View();
+        $pageTips = config('public.page_tips_content');
+        $view ->assign('pageTips', $pageTips['authRuleManagePage']);
         $view ->assign('rules', $rules['data']);
         $view ->assign('page', $rules['page']);
         return $view ->fetch('auth_rule/authRuleManage');
@@ -30,6 +32,8 @@ class AuthRule extends BaseServer
     // 权限规则添加页面
     public function authRuleAddPage () {
         $rule = ruleModel::getAllOpenTrueTopRule();
+        $pageTips = config('public.page_tips_content');
+        $this ->assign('pageTips', $pageTips['authRuleAddPage']);
         $this ->assign('rule', $rule);
         return  $this ->fetch('auth_rule/authRuleAdd');
     }
@@ -66,6 +70,8 @@ class AuthRule extends BaseServer
         $rule = ruleModel::getRuleIdFind($ruleId);
         if (!$rule) abort(404, $this->tipe404);
         $ruleRank = ruleModel::getAllOpenTrueTopRule();
+        $pageTips = config('public.page_tips_content');
+        $this ->assign('pageTips', $pageTips['authRuleUpdatePage']);
         $this->assign('ruleRank', $ruleRank);
         $this->assign('rule', $rule);
         return $this->fetch('auth_rule/authRuleUpdate');
