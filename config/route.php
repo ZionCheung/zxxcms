@@ -18,8 +18,7 @@ $apiRoute = config('public.api_route_prefix');
 // index 首页
 Route::get('/', 'client/client/clientIndex');
 
-/******************* Home ******************************/
-
+/******************* admin ******************************/
 // 登陆页面
 Route::get('/login', 'serverside/login/loginPage');
 // 登陆处理
@@ -78,6 +77,9 @@ Route::post('admin/authGroupStatusHandle', 'serverside/AuthGroup/authGroupStatus
 Route::post('admin/authGroupDelete', 'serverside/AuthGroup/authGroupDelete');
 // 权限组拥有权限页面
 Route::get('admin/authGroupRulesPage/:groupId','serverside/AuthGroup/authGroupRulesPage');
+// ----------------------------管理员管理 ------------------------------/
+// 管理员管理
+Route::get('admin/adminUserManagePage', 'serverside/Administrators/adminUserManagePage');
 
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');

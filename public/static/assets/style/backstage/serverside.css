@@ -697,3 +697,19 @@ table th, table td {
     background-color: #ecf5ff;
     color: #606266;
 }
+
+.user-info {
+    padding: 2vh 2vw;
+    position: relative;
+    display: flex;
+    justify-content: left;
+}
+.user-info .user-details{
+    padding: 0 2vw;
+}
+.user-info .user-details .user-list{
+    list-style: none;
+}
+.user-info .user-details .user-list li {
+    display: inline-block;
+}
