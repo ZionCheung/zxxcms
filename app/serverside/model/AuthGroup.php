@@ -18,6 +18,18 @@ class AuthGroup extends Model
     protected $table = 'zxx_admin_auth_group';
 
     /**
+     * @param $obj
+     * @return array
+     * 将返回值转化成数组
+     */
+    private static function setReturnArray (array $obj) : array
+    {
+        $data = [];
+        foreach ($obj as $v) {$data[] = $v ->toArray();}
+        return $data;
+    }
+
+    /**
      * @param $data
      * @return array|bool
      * 添加权限组
@@ -119,5 +131,18 @@ class AuthGroup extends Model
         $group = self::destroy($groupId);
         if ($group) return $response = ['code' => 0];
         return false;
+    }
+
+    /**
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 获取所有开放的权限组
+     */
+    public static function authGroupOpenAll () : array
+    {
+        $authGroup = self::where('status', 1)->field('id,title')->select();
+        return self::setReturnArray($authGroup);
     }
 }

@@ -16,4 +16,14 @@ use think\Model;
 class AuthGroupAccess extends Model
 {
     protected $table = 'zxx_admin_auth_group_access';
+
+    /**
+     * @param array $data
+     * @throws \Exception
+     * 新增用户权限
+     */
+    public function adminAuthAccessAdd (array $data)
+    {
+        $this->saveAll($data);
+    }
 }

@@ -19,16 +19,21 @@ $apiRoute = config('public.api_route_prefix');
 Route::get('/', 'client/client/clientIndex');
 
 /******************* admin ******************************/
+
+## ---------------------------- Login ----------------------##
 // 登陆页面
 Route::get('/login', 'serverside/login/loginPage');
 // 登陆处理
 Route::post('/loginHandle', 'serverside/login/loginHandle');
+
+## ---------------------------- Home ----------------------##
 // admin 首页
 Route::get('/admin', 'serverside/home/backHomePage');
 // admin 首页简介
 Route::get('/admin/welcome', 'serverside/home/backHomeInfo');
 // 图表统计
 Route::get('admin/chars', 'serverside/home/chartStatistics');
+## --------------------------------导航中心 ----------------------------##
 // 导航菜单添加页面
 Route::get('admin/menusaddpage', 'serverside/menus/menusAddPage');
 // 导航菜单添加异步处理
@@ -47,7 +52,9 @@ Route::get('admin/menusUpdatePage/:menusId', 'serverside/menus/menusUpdatePage')
 Route::post('admin/menusUpdateHandle', 'serverside/menus/menusUpdateHandle');
 // 导航添加子栏目页面
 Route::get('admin/menusAddChildPage/:menusId', 'serverside/menus/menusAddChildPage');
-// 权限规则管理页面
+
+## -------------------------------- 权限规则管理 ---------------------------------##
+# 权限规则管理页面
 Route::get('admin/authRuleManagePage', 'serverside/AuthRule/authRuleManagePage');
 // 权限规则添加页面
 Route::get('admin/authRuleAddPage', 'serverside/AuthRule/authRuleAddPage');
@@ -77,9 +84,14 @@ Route::post('admin/authGroupStatusHandle', 'serverside/AuthGroup/authGroupStatus
 Route::post('admin/authGroupDelete', 'serverside/AuthGroup/authGroupDelete');
 // 权限组拥有权限页面
 Route::get('admin/authGroupRulesPage/:groupId','serverside/AuthGroup/authGroupRulesPage');
-// ----------------------------管理员管理 ------------------------------/
+
+## ----------------------------管理员管理 ------------------------------##
 // 管理员管理
 Route::get('admin/adminUserManagePage', 'serverside/Administrators/adminUserManagePage');
+# 添加管理员
+Route::get('admin/adminUserAddPage', 'serverside/Administrators/adminUserAddPage');
+# 添加管理员操作
+Route::post('admin/adminUserAddHandle', 'serverside/Administrators/adminUserAddHandle');
 
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');
