@@ -86,13 +86,18 @@ Route::post('admin/authGroupDelete', 'serverside/AuthGroup/authGroupDelete');
 Route::get('admin/authGroupRulesPage/:groupId','serverside/AuthGroup/authGroupRulesPage');
 
 ## ----------------------------管理员管理 ------------------------------##
-// 管理员管理
+// 管理员管理页面
 Route::get('admin/adminUserManagePage', 'serverside/Administrators/adminUserManagePage');
-# 添加管理员
+# 添加管理员页面
 Route::get('admin/adminUserAddPage', 'serverside/Administrators/adminUserAddPage');
 # 添加管理员操作
 Route::post('admin/adminUserAddHandle', 'serverside/Administrators/adminUserAddHandle');
-
+# 管理员禁用/开启
+Route::post('admin/adminUserOnOffHandle','serverside/Administrators/adminUserOnOffHandle');
+# 管理员权限分配
+Route::post('admin/adminAuthGroupHandle','serverside/Administrators/adminAuthGroupHandle');
+# 管理员删除
+Route::post('admin/adminDeleteHandle','serverside/Administrators/adminDeleteHandle');
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');
 // api 获取用户信息

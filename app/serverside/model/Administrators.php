@@ -11,15 +11,69 @@ use think\Model;
 
 class Administrators extends Model
 {
+    /**
+     * @param $obj
+     * @return array
+     * 将返回值转化成数组
+     */
+    private static function setReturnArray (array $obj) : array
+    {
+        $data = [];
+        foreach ($obj as $v) {$data[] = $v ->toArray();}
+        return $data;
+    }
+
+    # 管理员自定义链接关联
     public function adminCustomizeLink () {
        return $this ->hasMany('CustomizeLink', 'administrators_id', 'admin_id');
     }
 
+    # 管理员权限组关联
+    public function adminAuthGroup ()
+    {
+        return $this->belongsToMany('AuthGroup','admin_auth_group_access','group_id','uid');
+    }
+
+    #管理员自定义连续查询
     public static function getAdminCustomizeLink () {
         $cLink = self::with('adminCustomizeLink')->where('admin_id', 1)->find();
         return $cLink->toArray();
     }
 
+    /**
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 获取管理员信息
+     */
+    public static function getAdminAuthGroup () : array
+    {
+        $authGroup = self::with('adminAuthGroup')
+            ->where('admin_delete','eq', 0)
+            ->field('admin_password,
+            admin_lock_password,
+            admin_delete,
+            admin_delete_time,
+            admin_token,', true)
+            ->select();
+        $adminArr = self::setReturnArray($authGroup);
+        foreach ($adminArr as &$v) {
+            $v['admin_reg_time'] = date('Y-m-d H:i:s', $v['admin_reg_time']);
+            $v['admin_login_time'] = date('Y-m-d H:i:s', $v['admin_login_time']);
+            foreach ($v['admin_auth_group'] as $vo) {
+                unset($vo['rules']);
+                unset($vo['pivot']);
+                unset($vo['group_desc']);
+                if ($vo['status'] == 1) {
+                    $v['auth'][] = $vo; # 判断权限开关组合新数组
+                }
+                continue;
+            }
+            unset($v['admin_auth_group']); # 销毁原始数组
+        }
+        return $adminArr;
+    }
     /**
      * @param $username
      * @param $password
@@ -80,5 +134,19 @@ class Administrators extends Model
             ];
         }
         return ['code' => 0, 'group' => $authArr];
+    }
+
+    /**
+     * @param int $data
+     * @return Administrators|null
+     * @throws \think\exception\DbException
+     * 管理员状态修改
+     */
+    public static function setAdminOnOff (int $data)
+    {
+        $adminOpen = self::get($data);
+        $status = $adminOpen->admin_open == 1 ? 0 : 1;
+        $code = self::where('admin_id', $data)->update(['admin_open' => $status]);
+        return $status;
     }
 }

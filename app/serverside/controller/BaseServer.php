@@ -30,8 +30,8 @@ class BaseServer extends Controller
         # 不需要验证权限的页面
         $notCheck = ['serverside/home/backhomepage', 'serverside/home/backhomeinfo'];
         if (in_array($rule, $notCheck)) return true;
-//        if (!$auth->check($rule, $adminSession['admin_id'])) {
-//            $this->error('没有操作权限', 'serverside/home/backhomeinfo','',1);
-//        }
+        if (!$auth->check($rule, $adminSession['admin_id'])) {
+            $this->error('没有操作权限', 'serverside/home/backhomeinfo','',1);
+        }
     }
 }

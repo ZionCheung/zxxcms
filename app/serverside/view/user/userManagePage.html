@@ -28,40 +28,68 @@
                                 </div>
                             </form>
                           <div class="layui-card-header" style="padding: 0">
-                            <button class="layui-btn" onclick="xadmin.open('添加管理员','{:url('serverside/Administrators/adminUserAddPage')}', 800, 620)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
+                            {if condition="$permissions.adminAddPage eq false"}
+                            <button class="layui-btn layui-btn-disabled" disabled><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
+                            {else/}
+                            <button class="layui-btn" onclick="xadmin.open('添加管理员','{:url('serverside/Administrators/adminUserAddPage')}', 600, 520)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
+                            {/if}
                           </div>
                         </div>
                     </div>
+                  {volist name="admin" id="admin" empty="暂时没有数据哦!"}
                   <div class="layui-col-md2 admin-box">
                     <div class="box">
                       <h3>管理员卡片</h3>
                       <div class="box-head">
-                        <img src="__IMG__/backstage/admin.jpeg" alt="">
+                        <img src="{$admin.admin_head_portrait}" alt="">
                       </div>
                       <ul class="box-desc">
-                          <li>用户名: <span>zioncheung</span></li>
-                          <li>昵称: <span>zioncheung</span></li>
-                          <li>联系电话: <span>13650502554</span></li>
-                          <li>联系邮箱: <span>939129894@qq.com</span></li>
-                          <li>管理员状态: <span style="color: red">禁用</span></li>
-                          <li>管理员角色: <span style="color: #0000FF">超级管理员</span></li>
-                          <li>注册IP: <span>127.0.0.1</span></li>
-                          <li>最后登陆IP: <span>127.0.0.1</span></li>
-                          <li>注册时间: <span>2019-12-12 09:32:22</span></li>
-                          <li>最后登陆时间: <span>2019-12-12 09:32:22</span></li>
-                          <li class="desc">管理员简介: <span>我们经撒打算打算是打算萨奥斯萨撒打算打算 奥斯啊奥斯停萨达萨达撒打算大师级的撒的的撒的骄傲时刻的撒 撒打算哈开始奥斯的</span></li>
+                          <li>用户名: <span>{$admin.admin_username}</span></li>
+                          <li>昵称: <span>{$admin.admin_nickname}</span></li>
+                          <li>联系电话: <span>{$admin.admin_telephone}</span></li>
+                          <li>联系邮箱: <span>{$admin.admin_email}</span></li>
+                          <li>管理员状态: {if condition="$admin.admin_open eq 1"}<span style="color: #00FF00">开启</span>{else/}<span style="color: red">禁用</span>{/if}</li>
+                          <li>管理员角色:
+                            {volist name="admin.auth" id="auth"}
+                            <span style="color: #189f92">{$auth.title}</span>
+                            {/volist}
+                          </li>
+                          <li>注册IP: <span>{$admin.admin_reg_ip}</span></li>
+                          <li>最后登陆IP: <span>{$admin.admin_login_ip}</span></li>
+                          <li>注册时间: <span>{$admin.admin_reg_time}</span></li>
+                          <li>最后登陆时间: <span>{$admin.admin_login_time}</span></li>
+                          <li class="desc">管理员简介: <span>{$admin.admin_desc}</span></li>
                       </ul>
                       <div class="box-btn">
                         <div class="layui-btn-container">
-                          <button type="button" class="layui-btn layui-btn-warm">禁用</button>
+                          {if condition="$permissions.adminOpen eq false"}
+                          <button type="button" class="layui-btn layui-btn-disabled" disabled title="你没有权限哦">
+                            {if condition="$admin.admin_open eq 1"}禁用{else /}开启{/if}
+                          </button>
+                          {else/}
+                          <button type="button" class="layui-btn layui-btn-primary" onclick="setAdminOnOff({$admin.admin_open},{$admin.admin_id})">
+                            {if condition="$admin.admin_open eq 1"}<span style="color: darkred">禁用</span>{else /}<span style="color: #009900">开启</span>{/if}
+                          </button>
+                          {/if}
+                          {if condition="$permissions.adminAuth eq false"}
+                          <button type="button" class="layui-btn layui-btn-normal layui-btn-disabled" title="你没有权限哦!" disabled>分配角色</button>
+                          {else/}
                           <button type="button" class="layui-btn layui-btn-normal">分配角色</button>
+                          {/if}
+                          {if condition="$permissions.adminDele === false"}
+                          <button type="button" class="layui-btn layui-btn-danger layui-btn-disabled" title="你没有权限哦!" disabled>
+                            <i class="layui-icon">&#xe640;</i>删除
+                          </button>
+                          {else/}
                           <button type="button" class="layui-btn layui-btn-danger">
                             <i class="layui-icon">&#xe640;</i>删除
                           </button>
+                          {/if}
                         </div>
                       </div>
                     </div>
                   </div>
+                  {/volist}
                   <div class="layui-card-body ">
                     <div class="page">
                     </div>
@@ -73,8 +101,19 @@
           layui.use(['form'], function(){
             form = layui.form;
           });
-
-           /*用户-删除*/
+          function setAdminOnOff(status,id) {
+            layer.confirm('请确认操作!', function (index) {
+              $.ajax({
+                type: 'POST'
+                ,data: {adminId : id}
+                ,url: "{:url('serverside/Administrators/adminUserOnOffHandle')}"
+                ,success: function (response) {
+                   layer.msg('操作成功',{icon:1,time:1000});
+                }
+                ,dataType: 'json'
+              });
+            })
+          }
           function member_del(obj,id){
               layer.confirm('确认要删除吗？',function(index){
                   //发异步删除数据
