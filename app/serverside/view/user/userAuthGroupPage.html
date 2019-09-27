@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+{include file="public/head"}
+
+<body>
+    <div class="layui-fluid">
+        <form method="post" class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label for="title" class="layui-form-label">
+                    <span class="x-red">*</span>管理员用户名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" disabled="disabled" autocomplete="off" class="layui-input" value="{$groupArr.username}">
+                    <input type="hidden" value="{$groupArr.userId}" id="userId">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">
+                    拥有权限/所有权限
+                </label>
+                <table class="layui-table layui-input-block">
+                    <tbody>
+                        {volist name="$groupArr.authGroup" id="vo" empty="暂时没有数据"}
+                        <tr>
+                            <td style="min-width:110px;">
+                                <input name="rid" lay-skin="primary" {if condition="in_array($vo.id, $groupArr.groupAccess)"} checked {else/}{/if} type="checkbox" value="{$vo.id}" title="{$vo.title}">
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                </table>
+                </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn" lay-submit="" lay-filter="add">确认</button>
+                </div>
+        </form>
+    </div>
+    <script>
+        layui.use(['form', 'layer'], function () {
+            $ = layui.jquery;
+            var form = layui.form
+                , layer = layui.layer;
+            //监听提交
+            form.on('submit(add)', function (data) {
+                var uid = $('#userId').val();
+                var dataInfo = new Array();
+                $.each($('input:checked'), function (i) {
+                    dataInfo[i] = $(this).val();
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: "{:url('serverside/Administrators/adminAuthGroupHandle')}",
+                    data: { 'uid': uid, 'gid': dataInfo },
+                    success: function (response) {
+                      if (response.code == 0) {
+                        layer.msg(response.mge,{icon:1,time:2000});
+                        setTimeout(() => {
+                          xadmin.close();
+                          xadmin.father_reload();
+                        }, 1000)
+                      } else {
+                        layer.msg(response.mge,{icon:5,time:2000});
+                      }
+                    },
+                    dataType: 'json'
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

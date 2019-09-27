@@ -35,7 +35,8 @@ class Administrators extends Model
     }
 
     #管理员自定义连续查询
-    public static function getAdminCustomizeLink () {
+    public static function getAdminCustomizeLink ()
+    {
         $cLink = self::with('adminCustomizeLink')->where('admin_id', 1)->find();
         return $cLink->toArray();
     }
@@ -47,10 +48,11 @@ class Administrators extends Model
      * @throws \think\exception\DbException
      * 获取管理员信息
      */
-    public static function getAdminAuthGroup () : array
+    public static function getAdminAuthGroup (string $key) : array
     {
         $authGroup = self::with('adminAuthGroup')
             ->where('admin_delete','eq', 0)
+            ->where('admin_username|admin_email|admin_telephone','like', '%'.$key.'%')
             ->field('admin_password,
             admin_lock_password,
             admin_delete,
@@ -142,11 +144,25 @@ class Administrators extends Model
      * @throws \think\exception\DbException
      * 管理员状态修改
      */
-    public static function setAdminOnOff (int $data)
+    public static function setAdminOnOff (int $data) : array
     {
         $adminOpen = self::get($data);
         $status = $adminOpen->admin_open == 1 ? 0 : 1;
         $code = self::where('admin_id', $data)->update(['admin_open' => $status]);
-        return $status;
+        if ($code) return ['code' => 0, 'mge' => '修改成功', 'status'=> $status, 'user' => $adminOpen->admin_username];
+        return ['code' => -1, 'mge' => '修改失败,系统出现问题,请稍后再试~~~~~'];
+    }
+
+    /**
+     * @param int $data
+     * @return array
+     * 管理员删除 软删除
+     */
+    public static function setAdminUserDelete (int $data) : array
+    {
+        $dataInfo = ['admin_delete' => 1, 'admin_delete_time' => time()];
+        $result = self::where('admin_id', 'eq', $data)->update($dataInfo);
+        if ($result) return ['code' => 0, 'mge' => '删除成功!'];
+        return ['code'=> -1, 'mge' => '删除失败,系统出现问题,请稍后再试~~~~~'];
     }
 }

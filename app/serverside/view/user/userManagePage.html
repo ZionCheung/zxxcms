@@ -2,12 +2,13 @@
 <html class="x-admin-sm">
 {include file="public/head"}
     <body>
-        <div class="x-nav">
+        <div class="x-nav prohibit">
             <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">演示</a>
+                <a>首页</a>
+                <a>用户管理</a>
                 <a>
-                    <cite>导航元素</cite></a>
+                    <cite>管理员管理</cite>
+                </a>
             </span>
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
                 <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
@@ -17,12 +18,12 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-body ">
+                        <div class="layui-card-body">
                           <blockquote class="layui-elem-quote">管理员管理页面</blockquote>
                           <hr>
-                          <form class="layui-form layui-col-space5">
+                          <form class="layui-form layui-col-space5" method="get" action="{:url('serverside/Administrators/adminUserManagePage')}">
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" style="width: 240px" placeholder="用户名/用户昵称/电话/邮箱" name="key"></div>
+                                    <input class="layui-input" style="width: 240px" placeholder="用户名/电话/邮箱" name="key"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach">搜索</button>
                                 </div>
@@ -37,7 +38,7 @@
                         </div>
                     </div>
                   {volist name="admin" id="admin" empty="暂时没有数据哦!"}
-                  <div class="layui-col-md2 admin-box">
+                  <div class="layui-col-md2 admin-box" id="card-{$admin.admin_id}">
                     <div class="box">
                       <h3>管理员卡片</h3>
                       <div class="box-head">
@@ -48,7 +49,7 @@
                           <li>昵称: <span>{$admin.admin_nickname}</span></li>
                           <li>联系电话: <span>{$admin.admin_telephone}</span></li>
                           <li>联系邮箱: <span>{$admin.admin_email}</span></li>
-                          <li>管理员状态: {if condition="$admin.admin_open eq 1"}<span style="color: #00FF00">开启</span>{else/}<span style="color: red">禁用</span>{/if}</li>
+                          <li>管理员状态: {if condition="$admin.admin_open eq 1"}<span id="adminOpen_{$admin.admin_id}" style="color: #00FF00">开启</span>{else/}<span id="adminOpen_{$admin.admin_id}" style="color: red">禁用</span>{/if}</li>
                           <li>管理员角色:
                             {volist name="admin.auth" id="auth"}
                             <span style="color: #189f92">{$auth.title}</span>
@@ -68,20 +69,20 @@
                           </button>
                           {else/}
                           <button type="button" class="layui-btn layui-btn-primary" onclick="setAdminOnOff({$admin.admin_open},{$admin.admin_id})">
-                            {if condition="$admin.admin_open eq 1"}<span style="color: darkred">禁用</span>{else /}<span style="color: #009900">开启</span>{/if}
+                            {if condition="$admin.admin_open eq 1"}<span id="openBtn_{$admin.admin_id}" style="color: darkred">禁用</span>{else /}<span id="openBtn_{$admin.admin_id}" style="color: #009900">开启</span>{/if}
                           </button>
                           {/if}
                           {if condition="$permissions.adminAuth eq false"}
                           <button type="button" class="layui-btn layui-btn-normal layui-btn-disabled" title="你没有权限哦!" disabled>分配角色</button>
                           {else/}
-                          <button type="button" class="layui-btn layui-btn-normal">分配角色</button>
+                          <button type="button" class="layui-btn layui-btn-normal" onclick="xadmin.open('添加管理员','{:url('serverside/Administrators/adminAuthGroupPage', ['adminId' => $admin.admin_id])}', 600, 520)">分配角色</button>
                           {/if}
                           {if condition="$permissions.adminDele === false"}
                           <button type="button" class="layui-btn layui-btn-danger layui-btn-disabled" title="你没有权限哦!" disabled>
                             <i class="layui-icon">&#xe640;</i>删除
                           </button>
                           {else/}
-                          <button type="button" class="layui-btn layui-btn-danger">
+                          <button type="button" class="layui-btn layui-btn-danger" onclick="member_del({$admin.admin_id})">
                             <i class="layui-icon">&#xe640;</i>删除
                           </button>
                           {/if}
@@ -101,6 +102,7 @@
           layui.use(['form'], function(){
             form = layui.form;
           });
+          // admin on/off
           function setAdminOnOff(status,id) {
             layer.confirm('请确认操作!', function (index) {
               $.ajax({
@@ -108,17 +110,44 @@
                 ,data: {adminId : id}
                 ,url: "{:url('serverside/Administrators/adminUserOnOffHandle')}"
                 ,success: function (response) {
-                   layer.msg('操作成功',{icon:1,time:1000});
+                  if (response.code == 0) {
+                    if (response.status == 1) {
+                      $('#adminOpen_'+id).html('开启');
+                      $('#openBtn_'+id).html('禁用');
+                      $('#openBtn_'+id).css('color', 'darkred');
+                      $('#adminOpen_'+id).css('color', '#00FF00');
+                    } else {
+                      $('#adminOpen_'+id).html('禁用');
+                      $('#openBtn_'+id).html('开启');
+                      $('#openBtn_'+id).css('color', '#009900');
+                      $('#adminOpen_'+id).css('color', 'red');
+                    }
+                    layer.msg(response.mge,{icon:1,time:2000});
+                  } else {
+                    layer.msg(response.mge,{icon:5,time:2000});
+                  }
                 }
                 ,dataType: 'json'
               });
             })
           }
-          function member_del(obj,id){
+          function member_del(id){
               layer.confirm('确认要删除吗？',function(index){
                   //发异步删除数据
-                  $(obj).parents("tr").remove();
-                  layer.msg('已删除!',{icon:1,time:1000});
+                $.ajax({
+                  type: 'POST'
+                  ,data: {adminId: id}
+                  ,url: "{:url('serverside/Administrators/adminDeleteHandle')}"
+                  ,success: function (response) {
+                    if (response.code == 0) {
+                      $('#card-'+id).remove();
+                      layer.msg(response.mge,{icon:1,time:1000});
+                    } else {
+                      layer.msg(response.mge,{icon:5,time:2000});
+                    }
+                  }
+                  ,dataType: 'json'
+                });
               });
           }
         </script>

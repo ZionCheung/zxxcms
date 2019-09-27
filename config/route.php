@@ -94,9 +94,11 @@ Route::get('admin/adminUserAddPage', 'serverside/Administrators/adminUserAddPage
 Route::post('admin/adminUserAddHandle', 'serverside/Administrators/adminUserAddHandle');
 # 管理员禁用/开启
 Route::post('admin/adminUserOnOffHandle','serverside/Administrators/adminUserOnOffHandle');
-# 管理员权限分配
+# 管理员权限分配页面
+Route::get('admin/adminAuthGroupPage/:adminId','serverside/Administrators/adminAuthGroupPage');
+# 管理员权限分配操作
 Route::post('admin/adminAuthGroupHandle','serverside/Administrators/adminAuthGroupHandle');
-# 管理员删除
+# 管理员删除操作
 Route::post('admin/adminDeleteHandle','serverside/Administrators/adminDeleteHandle');
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');
