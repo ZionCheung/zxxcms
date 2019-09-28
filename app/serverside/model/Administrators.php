@@ -86,13 +86,15 @@ class Administrators extends Model
      * @throws \think\exception\DbException
      * 获取管理员信息 登录
      */
-    public static function getUserLoginInfo ($username, $password) {
+    public static function getUserLoginInfo ($username, $password, $ip) {
         $user = self::where('admin_open', 'eq', 1)
             ->where('admin_username', 'eq', $username)
             ->where('admin_password', 'eq', md5($password))
             ->field('admin_delete_time,admin_delete,admin_password,admin_lock_password', true)
             ->find();
         if (empty($user)) return false;
+        $data = ['admin_login_ip' => $ip, 'admin_login_time' => time()];
+        self::where('admin_username','eq',$username)->update($data);
         $response = ['code' => 0, 'userInfo' => $user ->toArray()];
         return $response;
     }

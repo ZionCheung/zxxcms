@@ -8,6 +8,7 @@
 namespace app\serverside\controller;
 
 use think\auth\Auth;
+use think\Config;
 use think\Controller;
 
 class BaseServer extends Controller
@@ -27,9 +28,10 @@ class BaseServer extends Controller
         $action = $this->request->action();
         $auth = new Auth();
         $rule = strtolower($mod.'/'.$controller.'/'.$action);
-        # 不需要验证权限的页面
-        $notCheck = ['serverside/home/backhomepage', 'serverside/home/backhomeinfo'];
-        if (in_array($rule, $notCheck)) return true;
+        if (Config::get('auth.auth_not_status' == 1)) {
+            # 不需要验证权限的页面
+            if (in_array($rule, Config::get('auth.auth_not_check'))) return true;
+        }
         if (!$auth->check($rule, $adminSession['admin_id'])) {
             $this->error('没有操作权限', 'serverside/home/backhomeinfo','',1);
         }

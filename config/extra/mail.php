@@ -11,5 +11,5 @@ return [
     'mail-host' => 'smtp.163.com',
     'mail-port' => 465,
     'mail-username' => 'zx939129894@163.com',
-    'mail-password' => 'xxx520'
+    'mail-password' => 'xxx520',
 ];

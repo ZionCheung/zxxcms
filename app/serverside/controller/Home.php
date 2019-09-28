@@ -45,4 +45,10 @@ class Home extends BaseServer
         $view = new View();
         return $view ->fetch('home/welcome1');
     }
+
+    # 服务器监控
+    public function serverInfo ()
+    {
+        header('location:http://39.106.78.49:81/xprober.php');
+    }
 }

@@ -40,7 +40,7 @@ class Administrators extends BaseServer
     }
 
     # 管理员添加页面
-    public function adminUserAddPage () {
+    public function adminUserAddPage (Request $request) {
         $authGroup = groupModel::authGroupOpenAll();
         $this->assign('authGroup', $authGroup);
         return $this ->fetch('user/userAddPage');
@@ -61,7 +61,7 @@ class Administrators extends BaseServer
             $tomail = $data['email'];
             $name = $data['username'];
             $subject = 'ZXXCMS管理员账号激活邮件';
-            $content = '恭喜您,你成功成为一名管理员';
+            $content = SendMail::activationMailTemplate($data['username'], $data['pass'], $data['email'], $request->ip(), '12312322313');
             $mail = new SendMail($tomail,$name, $subject, $content);
             $result = $mail->sendMailAction();
             if (!$result) Log::error('添加管理员激活邮件发送失败');

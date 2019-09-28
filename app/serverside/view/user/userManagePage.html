@@ -30,7 +30,7 @@
                             </form>
                           <div class="layui-card-header" style="padding: 0">
                             {if condition="$permissions.adminAddPage eq false"}
-                            <button class="layui-btn layui-btn-disabled" disabled><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
+                            <button class="layui-btn layui-btn-disabled" disabled title="没有权限!"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
                             {else/}
                             <button class="layui-btn" onclick="xadmin.open('添加管理员','{:url('serverside/Administrators/adminUserAddPage')}', 600, 520)"><i class="fa fa-plus" style="margin-right: 4px;"></i>添加管理员</button>
                             {/if}

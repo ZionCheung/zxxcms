@@ -25,6 +25,8 @@ Route::get('/', 'client/client/clientIndex');
 Route::get('/login', 'serverside/login/loginPage');
 // 登陆处理
 Route::post('/loginHandle', 'serverside/login/loginHandle');
+# 退出登录
+Route::get('/loginOutHandle', 'serverside/login/loginOutHandle');
 
 ## ---------------------------- Home ----------------------##
 // admin 首页
@@ -33,6 +35,9 @@ Route::get('/admin', 'serverside/home/backHomePage');
 Route::get('/admin/welcome', 'serverside/home/backHomeInfo');
 // 图表统计
 Route::get('admin/chars', 'serverside/home/chartStatistics');
+# 服务器监控页面
+Route::get('admin/serverInfo', 'serverside/home/serverInfo');
+
 ## --------------------------------导航中心 ----------------------------##
 // 导航菜单添加页面
 Route::get('admin/menusaddpage', 'serverside/menus/menusAddPage');

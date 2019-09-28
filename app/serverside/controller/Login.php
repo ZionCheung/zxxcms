@@ -29,10 +29,24 @@ class Login extends Controller
         $data = $request ->post();
         $code = Session::pull('code');
         if (strtolower($code) !== strtolower($data['code'])) $this->error('验证码错误');
-        $user = Administrators::getUserLoginInfo($data['username'], $data['password']);
+        $user = Administrators::getUserLoginInfo($data['username'], $data['password'], $request->ip());
         if (!$user) $this ->error('账号/密码错误');
         $user['userInfo']['adminSign'] = $user['userInfo']['admin_token'].'_1';
         Session::set('adminSession', $user['userInfo']);
+        \app\serverside\model\OperationRecord::operationRecordAdd(0, '');
         $this ->success('登录成功,正在为你跳转主页...', url('serverside/home/backHomePage'), '', 1);
+    }
+
+    # 退出登录
+    public function loginOutHandle ()
+    {
+        Session::clear();
+        $this->redirect('serverside/login/loginPage');
+    }
+
+    # 管理员激活
+    public function adminActivation ()
+    {
+
     }
 }
