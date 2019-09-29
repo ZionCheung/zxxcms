@@ -9,10 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-
 use think\Route;
-// 获取api路由前缀包括版本号,定义路径为config/extra/public.php
-$apiRoute = config('public.api_route_prefix');
 
 /******************* index ******************************/
 // index 首页
@@ -39,7 +36,6 @@ Route::get('/admin/welcome', 'serverside/home/backHomeInfo');
 Route::get('admin/chars', 'serverside/home/chartStatistics');
 # 服务器监控页面
 Route::get('admin/serverInfo', 'serverside/home/serverInfo');
-
 ## --------------------------------导航中心 ----------------------------##
 // 导航菜单添加页面
 Route::get('admin/menusaddpage', 'serverside/menus/menusAddPage');
@@ -59,7 +55,6 @@ Route::get('admin/menusUpdatePage/:menusId', 'serverside/menus/menusUpdatePage')
 Route::post('admin/menusUpdateHandle', 'serverside/menus/menusUpdateHandle');
 // 导航添加子栏目页面
 Route::get('admin/menusAddChildPage/:menusId', 'serverside/menus/menusAddChildPage');
-
 ## -------------------------------- 权限规则管理 ---------------------------------##
 # 权限规则管理页面
 Route::get('admin/authRuleManagePage', 'serverside/AuthRule/authRuleManagePage');
@@ -91,7 +86,6 @@ Route::post('admin/authGroupStatusHandle', 'serverside/AuthGroup/authGroupStatus
 Route::post('admin/authGroupDelete', 'serverside/AuthGroup/authGroupDelete');
 // 权限组拥有权限页面
 Route::get('admin/authGroupRulesPage/:groupId','serverside/AuthGroup/authGroupRulesPage');
-
 ## ----------------------------管理员管理 ------------------------------##
 // 管理员管理页面
 Route::get('admin/adminUserManagePage', 'serverside/Administrators/adminUserManagePage');
@@ -107,7 +101,34 @@ Route::get('admin/adminAuthGroupPage/:adminId','serverside/Administrators/adminA
 Route::post('admin/adminAuthGroupHandle','serverside/Administrators/adminAuthGroupHandle');
 # 管理员删除操作
 Route::post('admin/adminDeleteHandle','serverside/Administrators/adminDeleteHandle');
+## ----------------------------文章 ------------------------------##
+$article = 'serverside/Article/';
+# 文章管理页面
+Route::get('article/articleManagePage', $article.'articleManagePage');
+# 文章添加页面
+Route::get('article/articleAddPage', $article.'articleAddPage');
+# 文章添加处理
+Route::post('article/articleAddHandle', $article.'articleAddHandle');
+# 文章更新页面
+Route::get('article/articleUpdatePage', $article.'articleUpdatePage');
+# 文章更新处理
+Route::post('article/articleUpdateHandle', $article.'articleUpdateHandle');
+# 文章软删除
+Route::post('article/articleAddRecyle', $article.'articleAddRecyle');
+# 文章开关
+Route::post('article/articleOpenRevise', $article.'articleOpenRevise');
+# 文章排序修改
+Route::post('article/articleSortRevise', $article.'articleSortRevise');
+# 文章回收站页面
+Route::get('article/articleRecyclePage', $article.'articleRecyclePage');
+# 文章恢复处理
+Route::post('article/articleRecoveryHandle', $article.'articleRecoveryHandle');
+# 文章删除
+Route::post('article/articleDelete', $article.'articleDelete');
+
 /****************** api ****************************/
 // Route::get/post('路由前缀/路由名/路由变量', '模块/版本.控制器/方法');
+// 获取api路由前缀包括版本号,定义路径为config/extra/public.php
+$apiRoute = config('public.api_route_prefix');
 // api 获取用户信息
 Route::get($apiRoute . '/getUserInfo/:id', $apiRoute . '.User/getUserInfo');
