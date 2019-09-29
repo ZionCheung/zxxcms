@@ -12,9 +12,11 @@ use app\serverside\model\AuthGroupAccess as accessModel;
 use app\serverside\model\OperationRecord;
 use lib\SendMail;
 use think\auth\Auth;
+use think\Cache;
 use think\Log;
 use think\Request;
 use think\Session;
+use think\Url;
 
 class Administrators extends BaseServer
 {
@@ -40,7 +42,7 @@ class Administrators extends BaseServer
     }
 
     # 管理员添加页面
-    public function adminUserAddPage (Request $request) {
+    public function adminUserAddPage () {
         $authGroup = groupModel::authGroupOpenAll();
         $this->assign('authGroup', $authGroup);
         return $this ->fetch('user/userAddPage');
@@ -61,7 +63,10 @@ class Administrators extends BaseServer
             $tomail = $data['email'];
             $name = $data['username'];
             $subject = 'ZXXCMS管理员账号激活邮件';
-            $content = SendMail::activationMailTemplate($data['username'], $data['pass'], $data['email'], $request->ip(), '12312322313');
+            $token = md5($data['pass']);
+            Cache::set($data['username'],$token, 86400);
+            $link ='http://'.$request->host().Url::build('serverside/login/adminActivation', ['token'=> $token, 'username'=> $data['username']]);
+            $content = SendMail::activationMailTemplate($data['username'], $data['pass'], $data['email'], $request->ip(), $link);
             $mail = new SendMail($tomail,$name, $subject, $content);
             $result = $mail->sendMailAction();
             if (!$result) Log::error('添加管理员激活邮件发送失败');
@@ -97,7 +102,7 @@ class Administrators extends BaseServer
         return $this->fetch('user/userAuthGroupPage');
     }
 
-    # 管理员权限分配
+    # 管理员权限分配操作
     public function adminAuthGroupHandle (Request $request)
     {
         if (!$request->isAjax()) abort('404', $this->tipe404);

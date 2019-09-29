@@ -89,13 +89,15 @@ class Administrators extends Model
     public static function getUserLoginInfo ($username, $password, $ip) {
         $user = self::where('admin_open', 'eq', 1)
             ->where('admin_username', 'eq', $username)
-            ->where('admin_password', 'eq', md5($password))
-            ->field('admin_delete_time,admin_delete,admin_password,admin_lock_password', true)
+            ->field('admin_delete_time,admin_delete,admin_lock_password', true)
             ->find();
         if (empty($user)) return false;
+        $userArr = $user->toArray();
+        $pass = $userArr['admin_password'];
+        if (!password_verify($password, $pass)) return false;
         $data = ['admin_login_ip' => $ip, 'admin_login_time' => time()];
         self::where('admin_username','eq',$username)->update($data);
-        $response = ['code' => 0, 'userInfo' => $user ->toArray()];
+        $response = ['code' => 0, 'userInfo' => $userArr];
         return $response;
     }
 
@@ -113,8 +115,8 @@ class Administrators extends Model
         if (!isset($data['auth'])) return ['code' => -1, 'mge' => '至少选择一种角色'];
         $dataInfo = [
             'admin_username' => trim($data['username']),
-            'admin_password' => md5($data['pass']),
-            'admin_lock_password' => md5($data['pass']),
+            'admin_password' => password_hash($data['pass'], 1),
+            'admin_lock_password' => password_hash($data['pass'], 1),
             'admin_email' => trim($data['email']),
             'admin_telephone' => $data['phone'],
             'admin_token' => md5($data['username']),
@@ -166,5 +168,17 @@ class Administrators extends Model
         $result = self::where('admin_id', 'eq', $data)->update($dataInfo);
         if ($result) return ['code' => 0, 'mge' => '删除成功!'];
         return ['code'=> -1, 'mge' => '删除失败,系统出现问题,请稍后再试~~~~~'];
+    }
+
+    /**
+     * @param string $data 激活账号
+     * @return array
+     * 激活管理员账号
+     */
+    public static function adminActivation (string $data) : array
+    {
+        $dataInfo = self::where('admin_username', 'eq', $data)->update(['admin_open'=> 1]);
+        if (!$dataInfo) return ['code' => -1, 'mge'=> '激活失败'];
+        return ['code' => 0, 'mge' =>'激活成功'];
     }
 }

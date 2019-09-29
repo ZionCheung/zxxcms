@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS `zxx_administrators`;
 CREATE TABLE `zxx_administrators`(
   `admin_id` INT UNSIGNED AUTO_INCREMENT,
   `admin_username` VARCHAR(50)UNIQUE NOT NULL COMMENT '管理员账号',
-  `admin_password` CHAR(32) NOT NULL COMMENT '管理员密码',
-  `admin_lock_password` CHAR (32) NOT NULL COMMENT '锁屏密码/默认和登录密码一样'
+  `admin_password` VARCHAR (200) NOT NULL COMMENT '管理员密码',
+  `admin_lock_password` VARCHAR (200) NOT NULL COMMENT '锁屏密码/默认和登录密码一样'
   `admin_email` VARCHAR(100)UNIQUE NOT NULL COMMENT '管理员验证邮箱',
   `admin_telephone` CHAR(11)UNIQUE NOT NULL COMMENT '管理员电话/11位手机号码',
   `admin_token` CHAR(32) UNIQUE NOT NULL COMMENT '管理员令牌',

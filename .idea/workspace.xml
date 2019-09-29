@@ -4,17 +4,12 @@
     <list default="true" id="f71ca9dc-3492-485e-958a-9f7720fa0317" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serverside/controller/Administrators.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/controller/Administrators.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serverside/controller/BaseServer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/controller/BaseServer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serverside/controller/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/controller/Home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serverside/controller/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/controller/Login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serverside/model/Administrators.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/model/Administrators.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serverside/view/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/view/home/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serverside/view/home/welcome1.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/view/home/welcome1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/serverside/view/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/view/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/serverside/view/user/userManagePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/serverside/view/user/userManagePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/extra/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/extra/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/extra/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/extra/mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/route.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/administrators.sql" beforeDir="false" afterPath="$PROJECT_DIR$/data/administrators.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extend/lib/SendMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/extend/lib/SendMail.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,33 +20,99 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1091730122">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="1" />
+          <entry key="PHP" value="15" />
+          <entry key="SQL" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PHP" value="1829" />
+          <entry key="SQL" value="11" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/serverside/controller/Administrators.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="707">
+              <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
+              <folding>
+                <element signature="e#140#189#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/serverside/controller/Login.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+              <folding>
+                <element signature="e#131#171#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/serverside/model/Administrators.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-244">
+              <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/route.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="24" column="48" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>log</find>
+      <find>adminActivation</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/extend/lib/SendMail.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/config/route.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/serverside/model/AuthGroupAccess.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/serverside/model/AuthGroup.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/serverside/model/Administrators.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/serverside/controller/Login.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/app/serverside/controller/Administrators.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/serverside/view/user/userAuthGroupPage.html" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/serverside/model/AuthGroupAccess.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/serverside/controller/Administrators.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/config/extra/developer.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/config/extra/auth.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/app/serverside/view/user/userManagePage.html" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/config/extra/auth.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/extend/lib/SendMail.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/serverside/model/Administrators.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/serverside/model/AuthGroup.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/config/database.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/app/serverside/controller/Login.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -61,21 +122,30 @@
         <option value="$PROJECT_DIR$/app/serverside/model/AuthGroupAccess.php" />
         <option value="$PROJECT_DIR$/app/serverside/view/user/userAuthGroupPage.html" />
         <option value="$PROJECT_DIR$/app/serverside/view/user/userManagePage.html" />
-        <option value="$PROJECT_DIR$/app/serverside/model/Administrators.php" />
-        <option value="$PROJECT_DIR$/app/serverside/view/login/login.html" />
         <option value="$PROJECT_DIR$/app/serverside/model/OperationRecord.php" />
         <option value="$PROJECT_DIR$/app/serverside/view/home/index.html" />
         <option value="$PROJECT_DIR$/app/serverside/view/home/welcome1.html" />
-        <option value="$PROJECT_DIR$/config/route.php" />
         <option value="$PROJECT_DIR$/app/serverside/controller/Home.php" />
         <option value="$PROJECT_DIR$/config/extra/auth.php" />
         <option value="$PROJECT_DIR$/app/serverside/controller/BaseServer.php" />
-        <option value="$PROJECT_DIR$/app/serverside/controller/Login.php" />
         <option value="$PROJECT_DIR$/config/extra/mail.php" />
+        <option value="$PROJECT_DIR$/config/route.php" />
         <option value="$PROJECT_DIR$/extend/lib/SendMail.php" />
+        <option value="$PROJECT_DIR$/app/serverside/model/Administrators.php" />
+        <option value="$PROJECT_DIR$/app/serverside/view/login/login.html" />
+        <option value="$PROJECT_DIR$/data/administrators.sql" />
+        <option value="$PROJECT_DIR$/app/serverside/controller/Login.php" />
         <option value="$PROJECT_DIR$/app/serverside/controller/Administrators.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/database/migrations/20190929033145_article.php" />
       </list>
     </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpServers">
     <servers />
@@ -109,6 +179,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,24 +195,69 @@
             <path>
               <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
               <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="serverside" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="serverside" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="serverside" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="serverside" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="serverside" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
               <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="extra" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="extend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="extend" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
               <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
               <item name="runtime" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="zxxcms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zxxcms" type="462c0819:PsiDirectoryNode" />
+              <item name="runtime" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,16 +304,18 @@
       <updated>1569546575137</updated>
       <workItem from="1569546577949" duration="15759000" />
       <workItem from="1569669416959" duration="12023000" />
+      <workItem from="1569719527507" duration="10241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27782000" />
+    <option name="totallyTimeSpent" value="38023000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1716418" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17359413" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -221,6 +339,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/api/validate/IntIDValidator.php">
@@ -253,9 +374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -293,24 +411,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/common.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="125" column="18" selection-start-line="125" selection-start-column="18" selection-end-line="125" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/common.rnc" />
     <entry file="file://$PROJECT_DIR$/app/serverside/view/user/userManagePage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="30" column="76" lean-forward="true" selection-start-line="30" selection-start-column="76" selection-end-line="30" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/serverside/view/login/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="22" column="75" selection-start-line="22" selection-start-column="75" selection-end-line="22" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -321,19 +426,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/serverside/view/home/xprober.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3610">
-          <caret line="1" column="14195" selection-start-line="1" selection-start-column="14195" selection-end-line="1" selection-end-column="14195" />
-          <folding>
-            <element signature="e#125362#125368#1" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/serverside/view/home/xprober.php" />
     <entry file="file://$PROJECT_DIR$/app/serverside/view/home/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1444">
@@ -362,29 +455,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/serverside/controller/BaseServer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#136#156#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/serverside/controller/Login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-          <folding>
-            <element signature="e#131#171#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -403,17 +479,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/serverside/model/Administrators.php">
+    <entry file="file://$PROJECT_DIR$/runtime/cache/b0/68931cc450442b63f5b3d276ea4297.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="93" column="21" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
+        <state relative-caret-position="33">
+          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/cache/8f/4c760dea0745f765751589c379fc89.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/cache/60/42c364cfe8b4b64222ea6c057543c0.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/extend/lib/SendMail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="95" column="39" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+        <state relative-caret-position="613">
+          <caret line="94" column="50" lean-forward="true" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
           <folding>
             <element signature="e#113#147#0#PHP" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -430,13 +523,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/cache/61/ccb557ae363170f08c5c1014873bbe.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/serverside/view/login/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/administrators.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/serverside/controller/Administrators.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+        <state relative-caret-position="707">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
           <folding>
             <element signature="e#140#189#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/serverside/controller/Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="e#131#171#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/common.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/command.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/20190929033145_article.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding>
+            <element signature="e#7#36#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/serverside/model/Administrators.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-244">
+          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
         </state>
       </provider>
     </entry>

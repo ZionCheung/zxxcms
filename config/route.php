@@ -27,6 +27,8 @@ Route::get('/login', 'serverside/login/loginPage');
 Route::post('/loginHandle', 'serverside/login/loginHandle');
 # 退出登录
 Route::get('/loginOutHandle', 'serverside/login/loginOutHandle');
+# 激活管理员
+Route::get('/adminActivation/:token/:username', 'serverside/login/adminActivation');
 
 ## ---------------------------- Home ----------------------##
 // admin 首页

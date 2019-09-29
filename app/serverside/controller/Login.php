@@ -8,7 +8,9 @@
 namespace app\serverside\controller;
 
 use app\serverside\model\Administrators;
+use think\Cache;
 use think\Controller;
+use think\Log;
 use think\Request;
 use think\Session;
 use think\View;
@@ -45,8 +47,19 @@ class Login extends Controller
     }
 
     # 管理员激活
-    public function adminActivation ()
+    public function adminActivation ($token, $username)
     {
-
+        $actionName = Cache::get($username);
+        if (!$actionName) $this->error('激活链接已过期或链接出错,请联系网站管理员!',url('serverside/login/loginPage'));
+        if ($token === $actionName) {
+            $action = Administrators::adminActivation($username);
+            if ($action['code'] == 0) {
+                Cache::rm($username);
+                $this->success('激活成功,正在跳转到登陆!', url('serverside/login/loginPage'),'',2);
+            } else {
+                Log::error('激活管理员异常');
+                $this->error('激活链接已过期或链接出错,请联系网站管理员!',url('serverside/login/loginPage'));
+            }
+        }
     }
 }

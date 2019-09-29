@@ -93,7 +93,7 @@ class SendMail
                         您的邮箱：<b>'.$email.'</b><br>
                         您注册时的日期：<b>'.date('Y-m-d H:i:s', time()).'</b><br>
                         您注册时的IP：<b>'.$ip.'</b><br>
-                        激活链接：<b>'.$link.'</b><br>
+                        激活链接：<b><a href="'.$link.'">'.$link.'</a>(此链接24小时有效,如果点击地址无效,请将地址复制然后用浏览器打开即可)</b><br>
                         由于管理员权限巨大,当您在使用本网站时，遵守当地法律法规,并认真查阅本网站的使用条款,合理合法的进行网站的管理工作。<br>
                         如果您有什么疑问可以联系本站所有人，Name:'.$owner.' Email: '.$ownerEmail.'</p>
                     <p align="right">'.$projectName.'管理系统</p>
