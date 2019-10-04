@@ -20,6 +20,7 @@ class Article extends BaseServer
     # 文章添加页面
     public function articleAddPage ()
     {
+        return $this->fetch('article/articleAdd');
     }
 
     # 文章添加处理

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="94154a9a-46d7-4175-b7e0-73acafeaf4a9" name="http://39.106.78.49:81" url="http://39.106.78.49:81">
+        <fileTransfer host="39.106.78.49" port="22" rootFolder="/www/zxxcms" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

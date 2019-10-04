@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="http://39.106.78.49:81">
     <serverData>
-      <paths name="travel-server">
+      <paths name="http://39.106.78.49:81">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
